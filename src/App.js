@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NotFoundPage from './404/404'
 import Header from "./Components/Header/Header";
 import StakeholderIdentification from "./Components/StakeholderIdentification/StakeholderIdentification";
+import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeyStakeholderInterview"
 import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
 
@@ -36,6 +37,7 @@ class App extends Component {
                 )}/>
                   <Route exact path="/StakeHolderIdentification" component={StakeholderIdentification}/>
 
+                  <Route exact path="/KeyStakeholderInterview" component={KeyStakeholderInterview}/>
 
                 <Route component={NotFoundPage}/>
               </Switch>
