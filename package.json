@@ -14,7 +14,8 @@
     "express": "latest"
   },
   "scripts": {
-    "heroku-prebuild": "npm install --dev",
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "echo This runs afterwards.",
     "start": "npm run build && node server.js",
     "dev": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production --open",
