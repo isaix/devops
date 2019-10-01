@@ -14,6 +14,7 @@
     "express": "latest"
   },
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
     "start": "npm run build && node server.js",
     "dev": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production --open",
