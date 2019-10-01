@@ -10,11 +10,13 @@
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "express": "latest"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production",
+    "start": "npm run build && node server.js",
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production --open",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
