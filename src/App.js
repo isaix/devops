@@ -8,44 +8,52 @@ import StakeholderIdentification from "./Components/StakeholderIdentification/St
 import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeyStakeholderInterview"
 import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
-
-
-
+import Stakeholders from "./Containers/Stakeholders/Stakeholders";
 
 
 class App extends Component {
-  render() {
+    render() {
 
-    return (
-          <Router>
-              <Switch>
-                <Route exact path="/" render={() => (
-                    <div>
-                        <Header/>
-                        <Main/>
-                    </div>
-                )}/>
-                <Route exact path="/Login" render={props => (
-                    <div>
-                        <Header/>
-                        <Login/>
-                    </div>
-                )}/>
-                <Route exact path="/login" render={props => (
-                    <div>
-                    </div>
-                )}/>
-                  <Route exact path="/StakeHolderIdentification" component={StakeholderIdentification}/>
+        return (
+            <Router>
+                <Switch>
+                    <Route exact path="/" render={() => (
+                        <div>
+                            <Header/>
+                            <Main/>
+                        </div>
+                    )}/>
+                    <Route exact path="/login" render={props => (
+                        <div>
+                            <Header/>
+                            <Login/>
+                        </div>
+                    )}/>
+                    <Route exact path="/stakeholders" render={props => (
+                        <div>
+                            <Header/>
+                            <Stakeholders/>
+                        </div>
+                    )}/>
+                    <Route exact path="/stakeholders/interview" render={props => (
+                        <div>
+                            <Header/>
+                            <KeyStakeholderInterview/>
+                        </div>
+                    )}/>
+                    <Route exact path="/stakeholders/identification" render={props => (
+                        <div>
+                            <Header/>
+                            <StakeholderIdentification/>
+                        </div>
+                    )}/>
+                    <Route component={NotFoundPage}/>
+                </Switch>
 
-                  <Route exact path="/KeyStakeholderInterview" component={KeyStakeholderInterview}/>
 
-                <Route component={NotFoundPage}/>
-              </Switch>
-
-
-          </Router>
-    )
-  }
+            </Router>
+        )
+    }
 
 }
 
