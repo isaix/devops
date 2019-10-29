@@ -16,6 +16,7 @@ class Header extends Component {
                     <Navbar className={"header-navbar"} bg="primary" variant="dark">
                         <Navbar.Brand href="/">React App</Navbar.Brand>
                         <Nav className="mr-auto">
+                            <Nav.Link href="stakeholders">Stakeholders</Nav.Link>
                             <Nav.Link href="login">Login</Nav.Link>
                         </Nav>
 
