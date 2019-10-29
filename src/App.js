@@ -16,18 +16,20 @@ import Login from "./Containers/Login/Login";
 class App extends Component {
   render() {
 
+     const loggedIn = true;
     return (
           <Router>
+              {
+                  loggedIn && <Header/>
+              }
               <Switch>
                 <Route exact path="/" render={() => (
                     <div>
-                        <Header/>
                         <Main/>
                     </div>
                 )}/>
                 <Route exact path="/Login" render={props => (
                     <div>
-                        <Header/>
                         <Login/>
                     </div>
                 )}/>
