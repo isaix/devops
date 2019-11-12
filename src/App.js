@@ -8,6 +8,7 @@ import StakeholderIdentification from "./Components/StakeholderIdentification/St
 import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeyStakeholderInterview"
 import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
+import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
 
 
 
@@ -37,6 +38,10 @@ class App extends Component {
                     <div>
                     </div>
                 )}/>
+                <Route exact path="/StakeholderStore" component={StakeholderOverview}/>
+
+
+
                   <Route exact path="/StakeHolderIdentification" component={StakeholderIdentification}/>
 
                   <Route exact path="/KeyStakeholderInterview" component={KeyStakeholderInterview}/>
