@@ -9,6 +9,7 @@ import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeySta
 import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
 import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
+import ProjectOverview from "./Components/ProjectOverview/ProjectOverview";
 
 
 
@@ -45,6 +46,8 @@ class App extends Component {
                   <Route exact path="/StakeHolderIdentification" component={StakeholderIdentification}/>
 
                   <Route exact path="/KeyStakeholderInterview" component={KeyStakeholderInterview}/>
+
+                  <Route exact path="/Projects" component={ProjectOverview}/>
 
                 <Route component={NotFoundPage}/>
               </Switch>
