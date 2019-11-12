@@ -28,9 +28,9 @@ class StakeholderOverview extends Component{
                     {this.state.Stakeholders.map(line =>{
                         return (
                             <tr>
-                                <th>{line.name} </th>
-                                <th>{line.email}</th>
-                                <th>{line.keyStakeHolder}</th>
+                                <td>{line.name} </td>
+                                <td>{line.mail}</td>
+                                <td>{line.keyStakeHolder.toString()}</td>
                             </tr>
                         )
                     })}
