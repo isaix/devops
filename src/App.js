@@ -9,7 +9,8 @@ import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeySta
 import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
 import ProjectScope_Component from "./Components/ProjectScope/ProjectScope_Component";
-
+import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
+import ProjectOverview from "./Components/ProjectOverview/ProjectOverview";
 
 
 
@@ -17,18 +18,20 @@ import ProjectScope_Component from "./Components/ProjectScope/ProjectScope_Compo
 class App extends Component {
   render() {
 
+     const loggedIn = true;
     return (
           <Router>
+              {
+                  loggedIn && <Header/>
+              }
               <Switch>
                 <Route exact path="/" render={() => (
                     <div>
-                        <Header/>
                         <Main/>
                     </div>
                 )}/>
                 <Route exact path="/Login" render={props => (
                     <div>
-                        <Header/>
                         <Login/>
                     </div>
                 )}/>
@@ -36,13 +39,19 @@ class App extends Component {
                     <div>
                     </div>
                 )}/>
+                <Route exact path="/StakeholderStore" component={StakeholderOverview}/>
+
+
+
                   <Route exact path="/StakeHolderIdentification" component={StakeholderIdentification}/>
 
                   <Route exact path="/KeyStakeholderInterview" component={KeyStakeholderInterview}/>
                   <Route exact path="/ProjectScope" component={ProjectScope_Component}/>
 
 
-                  <Route component={NotFoundPage}/>
+                  <Route exact path="/Projects" component={ProjectOverview}/>
+
+                <Route component={NotFoundPage}/>
               </Switch>
 
 

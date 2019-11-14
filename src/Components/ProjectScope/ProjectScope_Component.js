@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FormGroup from "react-bootstrap/es/FormGroup";
+//import FormGroup from "react-bootstrap/es/FormGroup";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -56,8 +56,7 @@ import Col from "react-bootstrap/Col";
                             <Form.Label>CONSTRAINTS:</Form.Label>
                             <Form.Control as="textarea" rows="3" autosize="true"/>
                             <Form.Label>APPROVALS (signatures) :</Form.Label>
-                            Person signatur skal gå igen i en liste
-                            Person	Signatur Det samme bør flere af de andre måske
+                            <Form.Control as="textarea" rows="3" autosize="true"/>
 
                         </Col>
 
