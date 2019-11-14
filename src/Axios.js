@@ -1,7 +1,7 @@
 import Axios from "axios";
 const path = {
     // api: "http://localhost:3030",
-    api: "https://dtu-devops-backend.herokuapp.com/"
+    api: "https://dtu-devops-backend.herokuapp.com"
 }
 
 /**
