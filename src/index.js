@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './Functions'
 
 // Bootstrap styles import # required for react-bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
