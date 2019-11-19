@@ -6,6 +6,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {createProject, deleteProject, getProjects} from "../../../Axios";
 import Create from "../Create/Create";
+import Col from "react-bootstrap/Col";
+import "./OverviewStyles.css"
 
 class Overview extends Component{
     constructor(props){
@@ -34,26 +36,19 @@ class Overview extends Component{
             <Container>
                 <Row>
                     <h1>Projects</h1>
-                    <Table>
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {projects.map(project => (
-                            <tr key={project._id}>
-                                <th>{project.title} </th>
-                                <th>{project.description}</th>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
                 </Row>
-
-                <Create update={this.updateProjects}/>
-
+                <Row>
+                    {projects.map(project => (
+                        <Col xs={2} key={project._id} className="project">
+                            <h6>{project.title}</h6>
+                            <p>{project.description}</p>
+                            <Button variant="danger">Delete</Button>
+                        </Col>
+                    ))}
+                </Row>
+                <Row>
+                    <Create update={this.updateProjects}/>
+                </Row>
             </Container>
 
         )

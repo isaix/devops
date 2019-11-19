@@ -1,0 +1,9 @@
+.container{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.project:hover {
+    outline: 2px dashed deepskyblue;
+}
