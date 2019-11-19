@@ -10,6 +10,7 @@ import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
 import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
 import Overview from "./Containers/Projects/Overview/Overview";
+import ProjectScope_Component from "./Components/ProjectScope/ProjectScope_Component";
 
 
 class App extends Component {
