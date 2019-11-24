@@ -72,6 +72,22 @@ export function deleteProject(id, callback) {
         })
 }
 
+export function login(username, password, callback) {
+    Axios.post(path.api + '/login/', {
+        headers:{
+            username: username,
+            password: password,
+        }
+    }).then(resp =>{
+        {
+            callback && callback(resp.status)
+        }
+    })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 
 // function handleError(error) {
 //     if (!error.response) {
