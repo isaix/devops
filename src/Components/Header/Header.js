@@ -21,6 +21,8 @@ class Header extends Component {
                             <Nav.Link href="/stakeholders/identification">StakeHolderIdentification</Nav.Link>
                             <Nav.Link href="/stakeholders/interview">KeyStakeholderInterview</Nav.Link>
                             <Nav.Link href="/projects">Projects</Nav.Link>
+                            <Nav.Link href="/projects/scope">Scope</Nav.Link>
+
                         </Nav>
 
                         <Form inline>
