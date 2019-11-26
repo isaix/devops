@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import ProjectStore from "../../../MobX/ProjectStore";
 import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import {createProject, deleteProject, getProjects} from "../../../Axios";
 import Create from "../Create/Create";
-import Col from "react-bootstrap/Col";
 import "./OverviewStyles.css"
+import {Card, Col, Button, Container, Row} from "react-bootstrap";
 
 class Overview extends Component{
     constructor(props){
@@ -25,9 +22,14 @@ class Overview extends Component{
         getProjects(projects => this.setState({projects}))
     };
 
-    handleDelete = () => {
-        deleteProject()
-    }
+    handleDelete = (id) => {
+        deleteProject(id)
+        //TODO: reload if successful
+    };
+
+    handleOpen = (id) => {
+        this.props.history.push('/projects/'+id.toString());
+    };
 
     render() {
         const {projects} = this.state;
@@ -36,13 +38,19 @@ class Overview extends Component{
             <Container>
                 <Row>
                     <h1>Projects</h1>
+
                 </Row>
                 <Row>
                     {projects.map(project => (
                         <Col xs={2} key={project._id} className="project">
-                            <h6>{project.title}</h6>
-                            <p>{project.description}</p>
-                            <Button variant="danger">Delete</Button>
+                            <Card>
+                                <Card.Header as="h5">{project.title}</Card.Header>
+                                <Card.Body>
+                                    <Card.Text>{project.description}</Card.Text>
+                                    <Button variant="primary" className="open_btn" onClick={() => this.handleOpen(project._id)}>Open</Button>
+                                    <Button variant="danger" className="delete_btn" onClick={() => this.handleDelete(project._id)}>Delete</Button>
+                                </Card.Body>
+                            </Card>
                         </Col>
                     ))}
                 </Row>

@@ -1,9 +1,14 @@
 .container{
+    display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: flex-start;
 }
 
-.project:hover {
+.project{
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
     outline: 2px dashed deepskyblue;
 }

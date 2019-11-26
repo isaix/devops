@@ -10,6 +10,7 @@ import Main from "./Containers/Main/Main";
 import Login from "./Containers/Login/Login";
 import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
 import Overview from "./Containers/Projects/Overview/Overview";
+import Project from "./Containers/Projects/Project/Project";
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
                     <Route exact path="/stakeholders/identification" component={StakeholderIdentification}/>
                     <Route exact path="/stakeholders/interview" component={KeyStakeholderInterview}/>
                     <Route exact path="/projects" component={Overview}/>
+                    <Route path="/projects/:id" component={Project}/>
 
                     <Route component={NotFoundPage}/>
                 </Switch>
