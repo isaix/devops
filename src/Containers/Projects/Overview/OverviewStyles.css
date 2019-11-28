@@ -1,14 +1,15 @@
-.container{
+.overview_container{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
-.column{
-    display: flex;
-    flex-direction: column;
+.overview_card{
+    width: 180px;
+    height: 200px;
+    margin: 5px;
 }
 
-.card:hover {
+.overview_card:hover {
     outline: 2px dashed deepskyblue;
 }

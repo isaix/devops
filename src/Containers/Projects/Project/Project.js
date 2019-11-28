@@ -1,11 +1,11 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
 import {getProject} from "../../../Axios";
-import Form from "../Create/Create";
 import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
 import IssuesOverview from "../../../Components/IssuesOverview/IssuesOverview";
 import TasksOverview from "../../../Components/TasksOverview/TasksOverview";
 import ProjectOverview from "../../../Components/ProjectOverview/ProjectOverview";
+import {Redirect} from "react-router-dom";
 //import "./ProjectStyle.css"
 
 const initialState = {
@@ -35,7 +35,7 @@ function View({view, project}){
             );
         case 'issues':
             return (
-                <IssuesOverview id={project._id}/>
+                <IssuesOverview project={project}/>
             );
         case 'stakeholders':
             return (
@@ -43,7 +43,6 @@ function View({view, project}){
             );
         default:
             return null;
-
     }
 }
 

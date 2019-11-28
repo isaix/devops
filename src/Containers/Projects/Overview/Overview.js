@@ -3,7 +3,7 @@ import ProjectStore from "../../../MobX/ProjectStore";
 import Table from "react-bootstrap/Table";
 import {createProject, deleteProject, getProjects} from "../../../Axios";
 import Create from "../Create/Create";
-//import "./OverviewStyles.css"
+import "./OverviewStyles.css"
 import {Card, Col, Button, ButtonGroup, Container, Row} from "react-bootstrap";
 
 class Overview extends Component{
@@ -36,25 +36,21 @@ class Overview extends Component{
         const {projects} = this.state;
 
         return (
-            <Container>
+            <Container className="overview_container">
                 <Row>
                     <h1>Projects</h1>
 
                 </Row>
                 <Row>
                     {projects.map(project => (
-                        <Col xs={2} key={project._id} className="column">
-                            <Card onClick={() => this.handleOpen(project._id)}>
-                                <Card.Header as="h5">{project.title}</Card.Header>
-                                <Card.Body>
-                                    <Card.Text>{project.description}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
+                        <Card key={project._id} className="overview_card" onClick={() => this.handleOpen(project._id)}>
+                            <Card.Header as="h5">{project.title}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{project.description}</Card.Text>
+                            </Card.Body>
+                        </Card>
                     ))}
-                    <Col xs={2} className="column">
-                        <Create update={this.updateProjects}/>
-                    </Col>
+                    <Create update={this.updateProjects}/>
                 </Row>
             </Container>
 

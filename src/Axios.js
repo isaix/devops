@@ -78,8 +78,8 @@ export function deleteProject(id, callback) {
  *
  */
 
-export function createIssue(id, issue, callback){
-    Axios.post(path.api + '/projects/projectname/task', {issue: issue})
+export function createIssue(project, issue, callback){
+    Axios.post(path.api + '/projects/' + project.title + '/' + project._id, issue)
         .then(resp => {
             {
                 callback && callback(resp.data)
@@ -90,8 +90,8 @@ export function createIssue(id, issue, callback){
         })
 }
 
-export function getIssues(id, callback){
-    Axios.get(path.api + '/projects/projectname/task')
+export function getIssues(project, callback){
+    Axios.get(path.api + '/projects/' + project.title + '/' + project._id)
         .then(resp => {
             {
                 callback && callback(resp.data, null)

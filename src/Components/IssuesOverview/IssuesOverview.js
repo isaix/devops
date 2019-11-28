@@ -15,16 +15,20 @@ class IssuesOverview extends Component{
         super(props);
         this.state = {
             issues: [],
+        };
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.issues.length <= 0) {
+            this.updateIssues();
         }
     }
 
-    componentDidMount() {
-        this.updateIssues();
-    }
-
     updateIssues = () => {
-        getIssues(this.props.id,call => {
+        console.log("updating issues")
+        getIssues(this.props.project,call => {
             let issues = call.items;
+            console.log(issues)
             this.setState({issues});
         })
     };
@@ -43,7 +47,7 @@ class IssuesOverview extends Component{
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
-                <IssueCreate update={this.updateIssues}/>
+                <IssueCreate update={this.updateIssues} project={this.props.project}/>
             </>
         );
     }

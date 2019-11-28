@@ -33,7 +33,7 @@ class IssueCreate extends Component {
     };
 
     handleCreate = (issue) => {
-        createIssue(issue, (err, issue) => {
+        createIssue(this.props.project, issue, (err, issue) => {
             if (err) {}
             this.setState({
                 show: false,
