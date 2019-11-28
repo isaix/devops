@@ -44,23 +44,17 @@ class Overview extends Component{
                 <Row>
                     {projects.map(project => (
                         <Col xs={2} key={project._id} className="column">
-                            <Card>
+                            <Card onClick={() => this.handleOpen(project._id)}>
                                 <Card.Header as="h5">{project.title}</Card.Header>
                                 <Card.Body>
                                     <Card.Text>{project.description}</Card.Text>
                                 </Card.Body>
-                                <Card.Footer>
-                                    <ButtonGroup>
-                                        <Button variant="primary" className="open_btn" onClick={() => this.handleOpen(project._id)}>Open</Button>
-                                        <Button variant="danger" className="delete_btn" onClick={() => this.handleDelete(project._id)}>Delete</Button>
-                                    </ButtonGroup>
-                                </Card.Footer>
                             </Card>
                         </Col>
                     ))}
-                </Row>
-                <Row>
-                    <Create update={this.updateProjects}/>
+                    <Col xs={2} className="column">
+                        <Create update={this.updateProjects}/>
+                    </Col>
                 </Row>
             </Container>
 

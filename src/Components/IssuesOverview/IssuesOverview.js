@@ -1,7 +1,7 @@
-import {Button, ButtonGroup, Card, Col, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
+import {ListGroup,} from "react-bootstrap";
 import React, {Component} from "react";
 import {getIssues} from "../../Axios";
-//import "./ProjectStyle.css"
+import IssueCreate from "../IssueCreate/IssueCreate";
 
 const initialState = {
     total_count: '',
@@ -33,14 +33,17 @@ class IssuesOverview extends Component{
         const {issues} = this.state;
 
         return (
-            <ListGroup variant="flush">
-                {issues.map(issue => (
-                    <ListGroup.Item>
-                        <h6>{issue.title}</h6>
-                        <p>{issue.state}</p>
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
+            <>
+                <ListGroup variant="flush">
+                    {issues.map(issue => (
+                        <ListGroup.Item>
+                            <h6>{issue.title}</h6>
+                            <p>{issue.state}</p>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+                <IssueCreate update={this.updateIssues}/>
+            </>
         );
     }
 }

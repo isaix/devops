@@ -25,7 +25,7 @@ class TasksOverview extends Component{
     }
 
     updateTasks = (id) => {
-        getProject(id,project => this.setState({project}))
+        getTasks(id,project => this.setState({project}))
     };
 
     render (){
