@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import {getProject} from "../../../Axios";
 import Form from "../Create/Create";
 import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
+import IssuesOverview from "../../../Components/IssuesOverview/IssuesOverview";
 //import "./ProjectStyle.css"
 
 const initialState = {
@@ -41,7 +42,7 @@ function View({view, project}){
             );
         case 'issues':
             return (
-                <p>Her skal være issues</p>
+                <IssuesOverview/>
             );
         case 'stakeholders':
             return (
@@ -74,7 +75,7 @@ class Project extends Component{
     };
 
     render (){
-        const {project} = this.state;
+        const {project, view} = this.state;
         const root = '/projects/' + project._id;
 
         return (
@@ -91,7 +92,7 @@ class Project extends Component{
                     </Navbar>
                 </Card.Header>
                 <Card.Body>
-                    <View view={this.state.view} project={project}/>
+                    <View view={view} project={project}/>
                 </Card.Body>
             </Card>
         );

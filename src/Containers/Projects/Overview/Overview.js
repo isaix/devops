@@ -20,6 +20,7 @@ class Overview extends Component{
 
     updateProjects = () => {
         getProjects(projects => this.setState({projects}))
+        console.log(this.state.projects);
     };
 
     handleDelete = (id) => {

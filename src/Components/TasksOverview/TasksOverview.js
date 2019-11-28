@@ -1,22 +1,14 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
-import {getProject} from "../../../Axios";
+import {getIssues} from "../../../Axios";
 import Form from "../Create/Create";
 //import "./ProjectStyle.css"
 
 const initialState = {
     title: '',
-    description: '',
-    start_date: '',
-    completed_by: '',
-    project_purpose: '',
-    project_description: '',
-    desired_results: '',
-    exclusions: '',
-    communication_needs: '',
-    acceptance_criteria: '',
-    constraints: '',
-    approvals: ''
+    number: '',
+    body: '',
+    state: ''
 }
 
 class TasksOverview extends Component{

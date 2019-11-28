@@ -72,6 +72,36 @@ export function deleteProject(id, callback) {
         })
 }
 
+/**
+ *
+ * Issues
+ *
+ */
+
+export function createIssue(issue, callback){
+    Axios.post(path.api + '/projects/projectname/task', {issue: issue})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getIssues(callback){
+    Axios.get(path.api + '/projects/projectname/task')
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 
 // function handleError(error) {
 //     if (!error.response) {
