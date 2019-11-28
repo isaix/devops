@@ -78,7 +78,7 @@ export function deleteProject(id, callback) {
  *
  */
 
-export function createIssue(issue, callback){
+export function createIssue(id, issue, callback){
     Axios.post(path.api + '/projects/projectname/task', {issue: issue})
         .then(resp => {
             {
@@ -90,7 +90,7 @@ export function createIssue(issue, callback){
         })
 }
 
-export function getIssues(callback){
+export function getIssues(id, callback){
     Axios.get(path.api + '/projects/projectname/task')
         .then(resp => {
             {

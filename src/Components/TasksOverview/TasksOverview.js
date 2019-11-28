@@ -1,15 +1,7 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
-import {getIssues} from "../../../Axios";
-import Form from "../Create/Create";
+import {getTasks} from "../../Axios";
 //import "./ProjectStyle.css"
-
-const initialState = {
-    title: '',
-    number: '',
-    body: '',
-    state: ''
-}
 
 class TasksOverview extends Component{
 
@@ -21,7 +13,7 @@ class TasksOverview extends Component{
     }
 
     componentDidMount() {
-        this.updateTasks();
+        //this.updateTasks();
     }
 
     updateTasks = (id) => {
@@ -32,7 +24,7 @@ class TasksOverview extends Component{
 
         return (
             <>
-
+                <h4>Tasks</h4>
             </>
         );
     }

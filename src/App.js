@@ -29,7 +29,7 @@ class App extends Component {
                     <Route exact path="/stakeholders/identification" component={StakeholderIdentification}/>
                     <Route exact path="/stakeholders/interview" component={KeyStakeholderInterview}/>
                     <Route exact path="/projects" component={Overview}/>
-                    <Route path="/projects/:id/:view" component={Project}/>
+                    <Route path="/:id/:view" component={Project}/>
 
                     <Route component={NotFoundPage}/>
                 </Switch>

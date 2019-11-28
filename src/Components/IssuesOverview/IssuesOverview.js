@@ -23,7 +23,7 @@ class IssuesOverview extends Component{
     }
 
     updateIssues = () => {
-        getIssues(call => {
+        getIssues(this.props.id,call => {
             let issues = call.items;
             this.setState({issues});
         })
@@ -34,6 +34,7 @@ class IssuesOverview extends Component{
 
         return (
             <>
+                <h4>Issues</h4>
                 <ListGroup variant="flush">
                     {issues.map(issue => (
                         <ListGroup.Item>

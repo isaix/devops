@@ -4,6 +4,8 @@ import {getProject} from "../../../Axios";
 import Form from "../Create/Create";
 import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
 import IssuesOverview from "../../../Components/IssuesOverview/IssuesOverview";
+import TasksOverview from "../../../Components/TasksOverview/TasksOverview";
+import ProjectOverview from "../../../Components/ProjectOverview/ProjectOverview";
 //import "./ProjectStyle.css"
 
 const initialState = {
@@ -25,28 +27,19 @@ function View({view, project}){
     switch (view) {
         case 'overview':
             return (
-                <ListGroup variant="flush">
-                    {Object.keys(project).map((key) => {
-                        return (
-                            <ListGroup.Item key={key}>
-                                <h6>{key.replace("_", " ").capitalize()}</h6>
-                                <p>{project[key]}</p>
-                            </ListGroup.Item>
-                        )
-                    })}
-                </ListGroup>
+                <ProjectOverview project={project}/>
             );
         case 'tasks':
             return (
-                <p>Her skal være tasks</p>
+                <TasksOverview id={project._id}/>
             );
         case 'issues':
             return (
-                <IssuesOverview/>
+                <IssuesOverview id={project._id}/>
             );
         case 'stakeholders':
             return (
-                <StakeholderOverview/>
+                <StakeholderOverview id={project._id}/>
             );
         default:
             return null;
@@ -76,7 +69,7 @@ class Project extends Component{
 
     render (){
         const {project, view} = this.state;
-        const root = '/projects/' + project._id;
+        const root = '/' + project._id;
 
         return (
             <Card>
