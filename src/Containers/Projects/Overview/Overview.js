@@ -28,7 +28,7 @@ class Overview extends Component{
     };
 
     handleOpen = (id) => {
-        this.props.history.push('/projects/'+id.toString());
+        this.props.history.push('/projects/'+id.toString()+'/overview');
     };
 
     render() {

@@ -2,6 +2,7 @@ import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
 import {getProject} from "../../../Axios";
 import Form from "../Create/Create";
+import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
 //import "./ProjectStyle.css"
 
 const initialState = {
@@ -19,17 +20,53 @@ const initialState = {
     approvals: ''
 };
 
+function View({view, project}){
+    switch (view) {
+        case 'overview':
+            return (
+                <ListGroup variant="flush">
+                    {Object.keys(project).map((key) => {
+                        return (
+                            <ListGroup.Item key={key}>
+                                <h6>{key.replace("_", " ").capitalize()}</h6>
+                                <p>{project[key]}</p>
+                            </ListGroup.Item>
+                        )
+                    })}
+                </ListGroup>
+            );
+        case 'tasks':
+            return (
+                <p>Her skal være tasks</p>
+            );
+        case 'issues':
+            return (
+                <p>Her skal være issues</p>
+            );
+        case 'stakeholders':
+            return (
+                <StakeholderOverview/>
+            );
+        default:
+            return null;
+
+    }
+}
+
 class Project extends Component{
 
     constructor(props) {
         super(props);
         this.state = {
             project: initialState,
+            view: '/overview',
         }
     }
 
     componentDidMount() {
-        this.updateProject(this.props.match.params.id);
+        let { id, view } = this.props.match.params;
+        this.updateProject(id);
+        this.setState({view});
     }
 
     updateProject = (id) => {
@@ -38,31 +75,23 @@ class Project extends Component{
 
     render (){
         const {project} = this.state;
+        const root = '/projects/' + project._id;
 
         return (
             <Card>
                 <Card.Header>
                     <h1>{project.title}</h1>
                     <Navbar className={"project-navbar"} bg="light" variant="light">
-                        <Navbar.Brand href={"/projects/" + project._id}>Overview</Navbar.Brand>
+                        <Navbar.Brand href={root + '/overview'}>Overview</Navbar.Brand>
                         <Nav className="mr-auto">
-                            <Nav.Link href="#tasks">Tasks</Nav.Link>
-                            <Nav.Link href="#issues">Issues</Nav.Link>
-                            <Nav.Link href="#stakeholders">Stakeholders</Nav.Link>
+                            <Nav.Link href={root + '/tasks'}>Tasks</Nav.Link>
+                            <Nav.Link href={root + '/issues'}>Issues</Nav.Link>
+                            <Nav.Link href={root + '/stakeholders'}>Stakeholders</Nav.Link>
                         </Nav>
                     </Navbar>
                 </Card.Header>
                 <Card.Body>
-                    <ListGroup variant="flush">
-                        {Object.keys(project).map((key) => {
-                            return (
-                                <ListGroup.Item key={key}>
-                                    <h6>{key.replace("_", " ").capitalize()}</h6>
-                                    <p>{project[key]}</p>
-                                </ListGroup.Item>
-                            )
-                        })}
-                    </ListGroup>
+                    <View view={this.state.view} project={project}/>
                 </Card.Body>
             </Card>
         );
