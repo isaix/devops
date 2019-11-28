@@ -6,10 +6,11 @@
 
 .overview_card{
     width: 180px;
-    height: 200px;
-    margin: 5px;
+    height: 180px;
+    margin: 20px;
 }
 
 .overview_card:hover {
     outline: 2px dashed deepskyblue;
+
 }

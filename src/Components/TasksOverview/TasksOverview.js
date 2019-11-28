@@ -12,12 +12,14 @@ class TasksOverview extends Component{
         }
     }
 
-    componentDidMount() {
-        //this.updateTasks();
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.tasks.length <= 0){
+            this.updateTasks(this.props.id)
+        }
     }
 
     updateTasks = (id) => {
-        getTasks(id,project => this.setState({project}))
+        getTasks(id, tasks => this.setState({tasks}))
     };
 
     render (){

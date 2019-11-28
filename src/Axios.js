@@ -102,6 +102,25 @@ export function getIssues(project, callback){
         })
 }
 
+export function closeIssue(project, issue, callback){
+    Axios.patch(path.api + '/projects/' + project.title + '/' + project._id, issue)
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/**
+ *
+ *
+ * Tasks
+ *
+ */
+
 
 // function handleError(error) {
 //     if (!error.response) {
