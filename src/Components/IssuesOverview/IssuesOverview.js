@@ -20,6 +20,7 @@ class IssuesOverview extends Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        //TODO: mistake
         if (this.state.issues.length <= 0) {
             this.updateIssues();
         }

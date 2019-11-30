@@ -120,7 +120,55 @@ export function closeIssue(project, issue, callback){
  * Tasks
  *
  */
+export function createTask(id, task, callback){
+    console.log({project: {task: task}})
+    Axios.put(path.api + '/projects/' + id + '/tasks/all', {project: {task: task}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
+export function getTasks(id, callback){
+    Axios.get(path.api + '/projects/' + id + '/tasks/all')
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function updateTask(id, task, callback){
+    Axios.patch(path.api + '/projects/' + id + '/tasks/' + task.task_id, {project: {task: task}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function deleteTask(p_id, t_id, callback) {
+    // noinspection JSCheckFunctionSignatures
+    Axios.delete(path.api + '/projects/' + p_id + '/tasks/' + t_id)
+        .then(resp => {
+            {
+                callback && callback(resp.status)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 
 // function handleError(error) {
 //     if (!error.response) {
