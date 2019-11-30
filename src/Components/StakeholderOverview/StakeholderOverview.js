@@ -24,7 +24,7 @@ class StakeholderOverview extends Component{
                 </Row>
                 <Row>
                     <Col>
-                        <h3>Key stakeholders:</h3>
+                        <h4>Key stakeholders:</h4>
                     </Col>
                 </Row>
                 <hr/>
@@ -37,7 +37,7 @@ class StakeholderOverview extends Component{
                 </Row>
                 <Row>
                     <Col>
-                        <h3>Stakeholders:</h3>
+                        <h4>Stakeholders:</h4>
                     </Col>
                 </Row>
                 <hr/>
@@ -56,11 +56,11 @@ class StakeholderOverview extends Component{
 
 function KeyStakeholders({stakeholders}){
     return (
-        <ListGroup>
-            {stakeholders.map(stakeholder => {
+        <>
+            {stakeholders.map((stakeholder, index) => {
                 if (stakeholder.keyStakeHolder)
                     return (
-                        <Card className="overview_card" >
+                        <Card key={index} className="overview_card" >
                             <Card.Header as="h6">{stakeholder.name}</Card.Header>
                             <Card.Body>
                                 <Card.Text>{stakeholder.mail}</Card.Text>
@@ -68,17 +68,17 @@ function KeyStakeholders({stakeholders}){
                         </Card>
                     );
             })}
-        </ListGroup>
+        </>
     );
 }
 
 function Stakeholders({stakeholders}){
     return (
-        <ListGroup>
-            {stakeholders.map(stakeholder => {
+        <>
+            {stakeholders.map((stakeholder, index) => {
                 if (!stakeholder.keyStakeHolder)
                     return (
-                        <Card className="overview_card" >
+                        <Card key={index} className="overview_card" >
                             <Card.Header as="h6">{stakeholder.name}</Card.Header>
                             <Card.Body>
                                 <Card.Text>{stakeholder.mail}</Card.Text>
@@ -86,7 +86,7 @@ function Stakeholders({stakeholders}){
                         </Card>
                     );
             })}
-        </ListGroup>
+        </>
     );
 }
 export default StakeholderOverview
