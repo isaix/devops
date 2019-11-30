@@ -13,8 +13,8 @@ class TasksOverview extends Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.tasks.length <= 0){
-            this.updateTasks(this.props.id)
+        if (this.state.tasks.length <= 0){
+            //this.updateTasks(this.props.id)
         }
     }
 

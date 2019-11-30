@@ -23,11 +23,6 @@ class Overview extends Component{
         console.log(this.state.projects);
     };
 
-    handleDelete = (id) => {
-        deleteProject(id)
-        //TODO: reload if successful
-    };
-
     handleOpen = (id) => {
         this.props.history.push('/'+id.toString()+'/overview');
     };
