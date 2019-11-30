@@ -76,6 +76,7 @@ class Project extends Component{
                     <h1>{project.title}</h1>
                     <Navbar className={"project-navbar"} bg="light" variant="light">
                         <Navbar.Brand href={root + '/overview'}>Overview</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="mr-auto">
                             <Nav.Link href={root + '/tasks'}>Tasks</Nav.Link>
                             <Nav.Link href={root + '/issues'}>Issues</Nav.Link>

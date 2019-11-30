@@ -2,6 +2,7 @@ import {ListGroup, Badge, Container, Col, Row, Button} from "react-bootstrap";
 import React, {Component} from "react";
 import {closeIssue, getIssues} from "../../Axios";
 import IssueCreate from "../IssueCreate/IssueCreate";
+import "./IssuesOverviewStyle.css"
 
 const initialState = {
     total_count: '',
@@ -43,26 +44,21 @@ class IssuesOverview extends Component{
         return (
             <Container>
                 <Row>
+
                     <Col>
-                        <h4>Issues</h4>
-                    </Col>
-                    <Col>
-                        <IssueCreate update={this.updateIssues} project={this.props.project}/>
+                        <h3>Issues    <IssueCreate update={this.updateIssues} project={this.props.project}/></h3>
                     </Col>
                 </Row>
+                <hr/>
+
                 <Row>
                     <Col>
-                        Open
-                    </Col>
-                    <Col>
-                        Closed
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
+                        <h5>Open:</h5>
                         <OpenIssues issues={issues} handleClose={this.handleClose}/>
                     </Col>
+                    <div className="issues_vert_line"/>
                     <Col>
+                        <h5>Closed:</h5>
                         <ClosedIssues issues={issues}/>
                     </Col>
                 </Row>

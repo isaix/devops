@@ -39,7 +39,6 @@ class Overview extends Component{
             <Container className="overview_container">
                 <Row>
                     <h1>Projects</h1>
-
                 </Row>
                 <Row>
                     {projects.map(project => (

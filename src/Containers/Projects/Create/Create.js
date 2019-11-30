@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-import ProjectStore from "../../../MobX/ProjectStore";
-import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import {createProject} from "../../../Axios";
-import Form from "react-bootstrap/Form";
+import {Card, Button, Modal, Form} from "react-bootstrap";
 
 const initialState = {
     title: '',
@@ -64,7 +58,8 @@ class Create extends Component {
         const {updateProjects} = this.props
         return (
             <>
-                <Button onClick={this.handleOpen} variant="primary">Create</Button>
+
+                <Button className="overview_create" variant="outline-primary" onClick={this.handleOpen}><h1 >+</h1></Button>
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create Project</Modal.Title>

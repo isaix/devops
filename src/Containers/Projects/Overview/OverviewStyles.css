@@ -14,3 +14,9 @@
     outline: 2px dashed deepskyblue;
 
 }
+
+.overview_create {
+    width: 100px;
+    height: 100px;
+    margin: 50px;
+}

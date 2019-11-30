@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import {createIssue} from "../../Axios";
-import Form from "react-bootstrap/Form";
+import {OverlayTrigger, Tooltip, Form, Modal, Button} from "react-bootstrap";
 
 const initialState = {
     issue_title: '',
@@ -50,7 +48,17 @@ class IssueCreate extends Component {
 
         return (
             <>
-                <Button onClick={this.handleOpen} variant="primary">Create</Button>
+                <OverlayTrigger
+                    placement="right"
+                    overlay={
+                        <Tooltip>
+                            Create new issue
+                        </Tooltip>
+                    }
+                >
+                    <Button onClick={this.handleOpen} variant="outline-primary">+</Button>
+                </OverlayTrigger>
+
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create Issue</Modal.Title>
