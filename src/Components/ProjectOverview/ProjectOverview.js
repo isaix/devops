@@ -12,7 +12,7 @@ class ProjectOverview extends Component{
         //deleteProject(id)
         //TODO: close if successful
     };
-
+    
     handleEdit = (project) => {
         
     }
