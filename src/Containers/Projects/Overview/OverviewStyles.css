@@ -11,8 +11,9 @@
 }
 
 .overview_card:hover {
-    outline: 2px dashed deepskyblue;
-
+    margin-top: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 4px 5px aliceblue;
 }
 
 .overview_create {

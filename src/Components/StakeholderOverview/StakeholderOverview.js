@@ -1,43 +1,92 @@
 import React, {Component} from 'react';
 import StakeholderStore from "../../MobX/StakeholderStore";
-import Table from 'react-bootstrap/Table';
+import {Badge, Button, Card, Col, Container, ListGroup, Row} from "react-bootstrap";
 
 class StakeholderOverview extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            Stakeholders: new StakeholderStore().getStakeholders(),
+            stakeholders: new StakeholderStore().getStakeholders(),
         }
     }
 
     render(){
+        const {stakeholders} = this.state;
+
         return (
 
-            <div>
-                <h1>Stakeholders</h1>
+            <Container>
+                <Row>
+                    <Col>
+                        <Button variant="outline-primary">Add +</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3>Key stakeholders:</h3>
+                    </Col>
+                </Row>
+                <hr/>
+                <Row>
+                    <Container className="overview_container">
+                        <Row>
+                            <KeyStakeholders stakeholders={stakeholders}/>
+                        </Row>
+                    </Container>
+                </Row>
+                <Row>
+                    <Col>
+                        <h3>Stakeholders:</h3>
+                    </Col>
+                </Row>
+                <hr/>
+                <Row>
+                    <Container className="overview_container">
+                        <Row>
+                            <Stakeholders stakeholders={stakeholders}/>
+                        </Row>
+                    </Container>
+                </Row>
+            </Container>
 
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Key Stakeholder?</th>
-                    </tr>
-                    </thead>
-                    {this.state.Stakeholders.map(line =>{
-                        return (
-                            <tr>
-                                <td>{line.name} </td>
-                                <td>{line.mail}</td>
-                                <td>{line.keyStakeHolder.toString()}</td>
-                            </tr>
-                        )
-                    })}
-                </Table>
-            </div>
         )
     }
 }
 
+function KeyStakeholders({stakeholders}){
+    return (
+        <ListGroup>
+            {stakeholders.map(stakeholder => {
+                if (stakeholder.keyStakeHolder)
+                    return (
+                        <Card className="overview_card" >
+                            <Card.Header as="h6">{stakeholder.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{stakeholder.mail}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    );
+            })}
+        </ListGroup>
+    );
+}
+
+function Stakeholders({stakeholders}){
+    return (
+        <ListGroup>
+            {stakeholders.map(stakeholder => {
+                if (!stakeholder.keyStakeHolder)
+                    return (
+                        <Card className="overview_card" >
+                            <Card.Header as="h6">{stakeholder.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{stakeholder.mail}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    );
+            })}
+        </ListGroup>
+    );
+}
 export default StakeholderOverview
