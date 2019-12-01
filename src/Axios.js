@@ -169,6 +169,59 @@ export function deleteTask(p_id, t_id, callback) {
         })
 }
 
+/**
+ * Stakeholders
+ */
+export function createStakeholder(id, stakeholder, callback){
+    Axios.put(path.api + '/projects/' + id + '/stakeholders/all', {project: {stakeholder: stakeholder}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getStakeholders(id, callback){
+    Axios.get(path.api + '/projects/' + id + '/stakeholders/all')
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function updateStakeholder(id, stakeholder, callback){
+    Axios.patch(path.api + '/projects/' + id + '/tasks/' + stakeholder.stakeholder_id, {project: {stakeholder: stakeholder}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function deleteTask(p_id, s_id, callback) {
+    // noinspection JSCheckFunctionSignatures
+    Axios.delete(path.api + '/projects/' + p_id + '/stakeholders/' + s_id)
+        .then(resp => {
+            {
+                callback && callback(resp.status)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+
 // function handleError(error) {
 //     if (!error.response) {
 //         // network error
