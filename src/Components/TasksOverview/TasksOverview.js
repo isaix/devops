@@ -1,7 +1,8 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row,} from "react-bootstrap";
 import React, {Component} from "react";
-import {deleteTask, getTasks} from "../../Axios";
+import {deleteTask, getTasks, updateTask} from "../../Axios";
 import TaskCreate from "../TaskCreate/TaskCreate";
+import Task from "../Task/Task";
 //import "./ProjectStyle.css"
 
 class TasksOverview extends Component{
@@ -13,12 +14,15 @@ class TasksOverview extends Component{
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        //TODO: big mistake
-        if (this.state.tasks.length <= 0){
-            this.updateTasks(this.props.id)
+
+
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.id){
+            this.updateTasks(nextProps.id)
         }
     }
+
+
 
     updateTasks = (id) => {
         getTasks(id, tasks => this.setState({tasks}))
@@ -28,7 +32,14 @@ class TasksOverview extends Component{
         deleteTask(this.props.id, id, call => {
             this.updateTasks(this.props.id);
         });
-    }
+    };
+
+    handleSave = (task) => {
+        updateTask(this.props.id, task, call => {
+            console.log(task);
+            this.updateTasks(this.props.id);
+        })
+    };
 
     render (){
         const {tasks} = this.state;
@@ -39,11 +50,7 @@ class TasksOverview extends Component{
                 <ListGroup>
                     {tasks.map((task, index) => {
                         return (
-                            <ListGroup.Item key={index}>
-                                <h5>{task.task_name}</h5>
-                                <p>{task.task_id}</p>
-                                <Button variant="outline-danger" onClick={() => this.handleDelete(task.task_id)}>Delete</Button>
-                            </ListGroup.Item>
+                            <Task task={task} key={index} save={this.handleSave} delete={() => this.handleDelete(task.task_id)}/>
                         );
                     })}
                 </ListGroup>

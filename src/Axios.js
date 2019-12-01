@@ -121,7 +121,6 @@ export function closeIssue(project, issue, callback){
  *
  */
 export function createTask(id, task, callback){
-    console.log({project: {task: task}})
     Axios.put(path.api + '/projects/' + id + '/tasks/all', {project: {task: task}})
         .then(resp => {
             {

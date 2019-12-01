@@ -19,9 +19,8 @@ class IssuesOverview extends Component{
         };
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        //TODO: mistake
-        if (this.state.issues.length <= 0) {
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.project){
             this.updateIssues();
         }
     }
