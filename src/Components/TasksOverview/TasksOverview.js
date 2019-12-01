@@ -14,15 +14,11 @@ class TasksOverview extends Component{
         }
     }
 
-
-
     UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.id){
             this.updateTasks(nextProps.id)
         }
     }
-
-
 
     updateTasks = (id) => {
         getTasks(id, tasks => this.setState({tasks}))

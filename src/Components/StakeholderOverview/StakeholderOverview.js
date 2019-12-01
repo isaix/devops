@@ -1,15 +1,39 @@
 import React, {Component} from 'react';
-import StakeholderStore from "../../MobX/StakeholderStore";
 import {Badge, Button, Card, Col, Container, ListGroup, Row} from "react-bootstrap";
+import Stakeholder from "../Stakeholder/Stakeholder"
+import {deleteStakeholder, getStakeholders, updateStakeholder} from "../../Axios";
+import StakeholderCreate from "../StakeholderCreate/StakeholderCreate";
 
 class StakeholderOverview extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            stakeholders: new StakeholderStore().getStakeholders(),
+            stakeholders: [],
         }
     }
+
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.id){
+            this.updateStakeholders(nextProps.id)
+        }
+    }
+
+    updateStakeholders = (id) => {
+        getStakeholders(id, stakeholders => this.setState({stakeholders}))
+    };
+
+    handleDelete = (id) => {
+        deleteStakeholder(this.props.id, id, call => {
+            this.updateStakeholders(this.props.id);
+        });
+    };
+
+    handleSave = (stakeholder) => {
+        updateStakeholder(this.props.id, stakeholder, call => {
+            this.updateStakeholders(this.props.id);
+        })
+    };
 
     render(){
         const {stakeholders} = this.state;
@@ -19,7 +43,7 @@ class StakeholderOverview extends Component{
             <Container>
                 <Row>
                     <Col>
-                        <Button variant="outline-primary">Add +</Button>
+                        <StakeholderCreate id={this.props.id} update={() => this.updateStakeholders(this.props.id)}/>
                     </Col>
                 </Row>
                 <Row>
@@ -31,7 +55,17 @@ class StakeholderOverview extends Component{
                 <Row>
                     <Container className="overview_container">
                         <Row>
-                            <KeyStakeholders stakeholders={stakeholders}/>
+                            {stakeholders.map((stakeholder, index) => {
+
+                                return (
+                                    <Stakeholder
+                                        key={index}
+                                        stakeholder={stakeholder}
+                                        save={this.handleSave}
+                                        delete={() => this.handleDelete(stakeholder.stakeholder_id)}
+                                    />
+                                );
+                            })}
                         </Row>
                     </Container>
                 </Row>
@@ -44,7 +78,7 @@ class StakeholderOverview extends Component{
                 <Row>
                     <Container className="overview_container">
                         <Row>
-                            <Stakeholders stakeholders={stakeholders}/>
+
                         </Row>
                     </Container>
                 </Row>
@@ -54,39 +88,4 @@ class StakeholderOverview extends Component{
     }
 }
 
-function KeyStakeholders({stakeholders}){
-    return (
-        <>
-            {stakeholders.map((stakeholder, index) => {
-                if (stakeholder.keyStakeHolder)
-                    return (
-                        <Card key={index} className="overview_card" >
-                            <Card.Header as="h6">{stakeholder.name}</Card.Header>
-                            <Card.Body>
-                                <Card.Text>{stakeholder.mail}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    );
-            })}
-        </>
-    );
-}
-
-function Stakeholders({stakeholders}){
-    return (
-        <>
-            {stakeholders.map((stakeholder, index) => {
-                if (!stakeholder.keyStakeHolder)
-                    return (
-                        <Card key={index} className="overview_card" >
-                            <Card.Header as="h6">{stakeholder.name}</Card.Header>
-                            <Card.Body>
-                                <Card.Text>{stakeholder.mail}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    );
-            })}
-        </>
-    );
-}
 export default StakeholderOverview

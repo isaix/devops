@@ -157,7 +157,6 @@ export function updateTask(id, task, callback){
 }
 
 export function deleteTask(p_id, t_id, callback) {
-    // noinspection JSCheckFunctionSignatures
     Axios.delete(path.api + '/projects/' + p_id + '/tasks/' + t_id)
         .then(resp => {
             {
@@ -197,7 +196,7 @@ export function getStakeholders(id, callback){
 }
 
 export function updateStakeholder(id, stakeholder, callback){
-    Axios.patch(path.api + '/projects/' + id + '/tasks/' + stakeholder.stakeholder_id, {project: {stakeholder: stakeholder}})
+    Axios.patch(path.api + '/projects/' + id + '/stakeholders/' + stakeholder.stakeholder_id, {project: {stakeholder: stakeholder}})
         .then(resp => {
             {
                 callback && callback(resp.data)
@@ -208,8 +207,7 @@ export function updateStakeholder(id, stakeholder, callback){
         })
 }
 
-export function deleteTask(p_id, s_id, callback) {
-    // noinspection JSCheckFunctionSignatures
+export function deleteStakeholder(p_id, s_id, callback) {
     Axios.delete(path.api + '/projects/' + p_id + '/stakeholders/' + s_id)
         .then(resp => {
             {

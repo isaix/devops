@@ -21,12 +21,12 @@ class IssuesOverview extends Component{
 
     UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.project){
-            this.updateIssues();
+            this.updateIssues(nextProps.project);
         }
     }
 
-    updateIssues = () => {
-        getIssues(this.props.project,call => {
+    updateIssues = (project) => {
+        getIssues(project,call => {
             let issues = call.items;
             this.setState({issues});
         })
@@ -34,7 +34,7 @@ class IssuesOverview extends Component{
 
     handleClose = (number) => {
         closeIssue(this.props.project, {issue_number: number,}, call => {
-            this.updateIssues();
+            this.updateIssues(this.props.project);
         })
     };
 
@@ -46,7 +46,7 @@ class IssuesOverview extends Component{
                 <Row>
 
                     <Col>
-                        <h3>Issues    <IssueCreate update={this.updateIssues} project={this.props.project}/></h3>
+                        <h3>Issues    <IssueCreate update={() => this.updateIssues(this.props.project)} project={this.props.project}/></h3>
                     </Col>
                 </Row>
                 <hr/>
