@@ -14,7 +14,9 @@ const initialState = {
     communication_needs: '',
     acceptance_criteria: '',
     constraints: '',
-    approvals: ''
+    approvals: '',
+    github_url: '',
+    github_auth: ''
 }
 
 class Create extends Component {
