@@ -41,7 +41,7 @@ class Login extends Component {
                             <Card>
                             {/*Tyvstjålet kode*/}
                             <div className="Login">
-                                <form onSubmit={this.handleSubmit.bind(this)} style="width:80%">
+                                <form onSubmit={this.handleSubmit.bind(this)} style={{width:"80%"}}>
                                     <FormGroup controlId="email" size="large">
                                         <FormLabel>Email</FormLabel>
                                         <FormControl
