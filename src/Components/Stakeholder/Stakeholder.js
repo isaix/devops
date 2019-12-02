@@ -30,7 +30,7 @@ class Stakeholder extends Component{
     };
 
     handleClose = () => {
-        this.setState({show: false})
+        this.setState({show: false, edit: false})
     };
 
     handleEdit = () => {
@@ -56,6 +56,7 @@ class Stakeholder extends Component{
                 <Card className="overview_card" onClick={this.handleOpen} >
                     <Card.Header as="h6">{stakeholder.stakeholder_name}</Card.Header>
                     <Card.Body>
+                        <Card.Title as="u">Interest:</Card.Title>
                         <Card.Text>{stakeholder.stakeholder_interest}</Card.Text>
                     </Card.Body>
                 </Card>
@@ -92,22 +93,48 @@ function View ({edit, stakeholder, onChange}){
         return (
             <Form>
                 <Form.Group>
-                    <Form.Label>Task Name</Form.Label>
-                    <Form.Control
-                        name="stakeholder_name"
-                        value={stakeholder.stakeholder_name}
-                        onChange={onChange}
-                    />
+                    {Object.keys(stakeholder).map((key) => {
+                        if (!key.includes('id')){
+                            return (
+                                <Form.Group key={key}>
+                                    <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
+                                    {key.includes('type') ? (
+                                        <Form.Control
+                                            as="select"
+                                            name={key}
+                                            value={stakeholder[key]}
+                                            onChange={onChange}
+                                        >
+                                            <option>primary</option>
+                                            <option>secondary</option>
+                                        </Form.Control>
+                                    ) : (
+                                        <Form.Control
+                                            name={key}
+                                            value={stakeholder[key]}
+                                            onChange={onChange}
+                                        />
+                                    )}
+                                </Form.Group>
+                            )
+                        }
+                    })}
                 </Form.Group>
             </Form>
         );
     }
     else {
         return (
-            <div>
-                <h5>Task Name</h5>
-                <p>{stakeholder.stakeholder_name}</p>
-            </div>
+            Object.keys(stakeholder).map((key) => {
+                if (!key.includes('name')){
+                    return (
+                        <div key={key}>
+                            <h5>{key.replace("_", " ").capitalize()}</h5>
+                            <p>{stakeholder[key]}</p>
+                        </div>
+                    )
+                }
+            })
         );
     }
 }

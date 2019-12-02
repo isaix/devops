@@ -71,11 +71,23 @@ class StakeholderCreate extends Component {
                                 return (
                                     <Form.Group key={key}>
                                         <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
-                                        <Form.Control
-                                            name={key}
-                                            value={stakeholder[key]}
-                                            onChange={this.handleChange}
-                                        />
+                                        {key.includes('type') ? (
+                                            <Form.Control
+                                                as="select"
+                                                name={key}
+                                                value={stakeholder[key]}
+                                                onChange={this.handleChange}
+                                            >
+                                                <option>primary</option>
+                                                <option>secondary</option>
+                                            </Form.Control>
+                                        ) : (
+                                            <Form.Control
+                                                name={key}
+                                                value={stakeholder[key]}
+                                                onChange={this.handleChange}
+                                            />
+                                        )}
                                     </Form.Group>
                                 )
                             }
