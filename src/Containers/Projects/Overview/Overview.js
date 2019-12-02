@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import ProjectStore from "../../../MobX/ProjectStore";
-import Table from "react-bootstrap/Table";
-import {createProject, deleteProject, getProjects} from "../../../Axios";
+import {getProjects} from "../../../Axios";
 import Create from "../Create/Create";
 import "./OverviewStyles.css"
-import {Card, Col, Button, ButtonGroup, Container, Row} from "react-bootstrap";
+import {Card, Container, Row} from "react-bootstrap";
 
 class Overview extends Component{
     constructor(props){
@@ -20,7 +18,6 @@ class Overview extends Component{
 
     updateProjects = () => {
         getProjects(projects => this.setState({projects}))
-        console.log(this.state.projects);
     };
 
     handleOpen = (id) => {

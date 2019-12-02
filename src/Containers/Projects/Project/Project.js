@@ -1,6 +1,6 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
-import {getProject} from "../../../Axios";
+import {deleteProject, getProject, updateProject} from "../../../Axios";
 import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
 import IssuesOverview from "../../../Components/IssuesOverview/IssuesOverview";
 import TasksOverview from "../../../Components/TasksOverview/TasksOverview";
@@ -23,29 +23,6 @@ const initialState = {
     approvals: ''
 };
 
-function View({view, project}){
-    switch (view) {
-        case 'overview':
-            return (
-                <ProjectOverview project={project}/>
-            );
-        case 'tasks':
-            return (
-                <TasksOverview id={project._id}/>
-            );
-        case 'issues':
-            return (
-                <IssuesOverview project={project}/>
-            );
-        case 'stakeholders':
-            return (
-                <StakeholderOverview id={project._id}/>
-            );
-        default:
-            return null;
-    }
-}
-
 class Project extends Component{
 
     constructor(props) {
@@ -64,6 +41,21 @@ class Project extends Component{
 
     updateProject = (id) => {
         getProject(id,project => this.setState({project}))
+    };
+
+    handleDelete = () => {
+        deleteProject(this.state.project._id, call => {
+            //Todo: return to projects tab
+            this.props.history.goBack();
+        });
+    };
+
+    handleSave = (project) => {
+        updateProject(project, call => {
+            this.updateProject(project._id)
+            console.log(project)
+            //TOdo: somehow this doesn't get updated on the backend..
+        })
     };
 
     render (){
@@ -85,7 +77,29 @@ class Project extends Component{
                     </Navbar>
                 </Card.Header>
                 <Card.Body>
-                    <View view={view} project={project}/>
+                    {(() => {
+                            switch (view) {
+                                case 'overview':
+                                    return (
+                                        <ProjectOverview project={project} save={this.handleSave} delete={this.handleDelete}/>
+                                    );
+                                case 'tasks':
+                                    return (
+                                        <TasksOverview id={project._id}/>
+                                    );
+                                case 'issues':
+                                    return (
+                                        <IssuesOverview project={project}/>
+                                    );
+                                case 'stakeholders':
+                                    return (
+                                        <StakeholderOverview id={project._id}/>
+                                    );
+                                default:
+                                    return null;
+                            }
+                        }
+                    )()}
                 </Card.Body>
             </Card>
         );
