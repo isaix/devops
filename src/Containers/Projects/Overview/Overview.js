@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import ProjectStore from "../../../MobX/ProjectStore";
 import Table from "react-bootstrap/Table";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import {createProject, deleteProject, getProjects} from "../../../Axios";
 import Create from "../Create/Create";
+import "./OverviewStyles.css"
+import {Card, Col, Button, ButtonGroup, Container, Row} from "react-bootstrap";
 
 class Overview extends Component{
     constructor(props){
@@ -21,39 +20,32 @@ class Overview extends Component{
 
     updateProjects = () => {
         getProjects(projects => this.setState({projects}))
+        console.log(this.state.projects);
     };
 
-    handleDelete = () => {
-        deleteProject()
-    }
+    handleOpen = (id) => {
+        this.props.history.push('/'+id.toString()+'/overview');
+    };
 
     render() {
         const {projects} = this.state;
 
         return (
-            <Container>
+            <Container className="overview_container">
                 <Row>
                     <h1>Projects</h1>
-                    <Table>
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {projects.map(project => (
-                            <tr key={project._id}>
-                                <th>{project.title} </th>
-                                <th>{project.description}</th>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
                 </Row>
-
-                <Create update={this.updateProjects}/>
-
+                <Row>
+                    {projects.map(project => (
+                        <Card key={project._id} className="overview_card" onClick={() => this.handleOpen(project._id)}>
+                            <Card.Header as="h6">{project.title}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{project.description}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                    <Create update={this.updateProjects}/>
+                </Row>
             </Container>
 
         )

@@ -1,34 +1,24 @@
 import React, {Component} from 'react';
-import {createProject} from "../../../Axios";
-import {Card, Button, Modal, Form} from "react-bootstrap";
+import {createIssue} from "../../Axios";
+import {OverlayTrigger, Tooltip, Form, Modal, Button} from "react-bootstrap";
 
 const initialState = {
-    title: '',
-    description: '',
-    start_date: '',
-    completed_by: '',
-    project_purpose: '',
-    project_description: '',
-    desired_results: '',
-    exclusions: '',
-    communication_needs: '',
-    acceptance_criteria: '',
-    constraints: '',
-    approvals: ''
+    issue_title: '',
+    issue_description: ''
 }
 
-class Create extends Component {
+class IssueCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            project: initialState,
+            issue: initialState,
             show: false
         }
     }
 
     handleChange = (e) => {
         console.log(e.target)
-        this.setState({project: {...this.state.project, [e.target.name]: e.target.value}})
+        this.setState({issue: {...this.state.issue, [e.target.name]: e.target.value}})
     }
 
 
@@ -40,12 +30,12 @@ class Create extends Component {
         this.setState({show: false})
     };
 
-    handleCreate = (project) => {
-        createProject(project, (err, project) => {
+    handleCreate = (issue) => {
+        createIssue(this.props.project, issue, (err, issue) => {
             if (err) {}
             this.setState({
                 show: false,
-                project: initialState
+                issue: initialState
             })
             this.props.update && this.props.update()
         })
@@ -54,25 +44,34 @@ class Create extends Component {
 
 
     render() {
-        const {project, show} = this.state;
-        const {updateProjects} = this.props
+        const {issue, show} = this.state;
+
         return (
             <>
+                <OverlayTrigger
+                    placement="right"
+                    overlay={
+                        <Tooltip>
+                            Create new issue
+                        </Tooltip>
+                    }
+                >
+                    <Button onClick={this.handleOpen} variant="outline-primary">+</Button>
+                </OverlayTrigger>
 
-                <Button className="overview_create" variant="outline-primary" onClick={this.handleOpen}><h1 >+</h1></Button>
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Project</Modal.Title>
+                        <Modal.Title>Create Issue</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            {Object.keys(project).map((key) => {
+                            {Object.keys(issue).map((key) => {
                                 return (
                                     <Form.Group key={key}>
                                         <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
                                         <Form.Control
                                             name={key}
-                                            value={project[key]}
+                                            value={issue[key]}
                                             onChange={this.handleChange}
                                         />
                                     </Form.Group>
@@ -84,7 +83,7 @@ class Create extends Component {
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={() => this.handleCreate(project)}>
+                        <Button variant="primary" onClick={() => this.handleCreate(issue)}>
                             Save
                         </Button>
                     </Modal.Footer>
@@ -95,4 +94,4 @@ class Create extends Component {
 
 }
 
-export default Create
+export default IssueCreate

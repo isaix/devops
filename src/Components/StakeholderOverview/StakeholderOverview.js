@@ -1,41 +1,89 @@
 import React, {Component} from 'react';
-import StakeholderStore from "../../MobX/StakeholderStore";
-import Table from 'react-bootstrap/Table';
+import {Badge, Button, Card, Col, Container, ListGroup, Row} from "react-bootstrap";
+import Stakeholder from "../Stakeholder/Stakeholder"
+import {deleteStakeholder, getStakeholders, updateStakeholder} from "../../Axios";
+import StakeholderCreate from "../StakeholderCreate/StakeholderCreate";
 
 class StakeholderOverview extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            Stakeholders: new StakeholderStore().getStakeholders(),
+            stakeholders: [],
         }
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.id){
+            this.updateStakeholders(nextProps.id)
+        }
+    }
+
+    updateStakeholders = (id) => {
+        getStakeholders(id, stakeholders => this.setState({stakeholders}))
+    };
+
+    handleDelete = (id) => {
+        deleteStakeholder(this.props.id, id, call => {
+            this.updateStakeholders(this.props.id);
+        });
+    };
+
+    handleSave = (stakeholder) => {
+        updateStakeholder(this.props.id, stakeholder, call => {
+            this.updateStakeholders(this.props.id);
+        })
+    };
+
     render(){
+        const {stakeholders} = this.state;
+
         return (
 
-            <div>
-                <h1>Stakeholders</h1>
+            <Container>
+                <Row>
+                    <Col>
+                        <StakeholderCreate id={this.props.id} update={() => this.updateStakeholders(this.props.id)}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h4>Key stakeholders:</h4>
+                    </Col>
+                </Row>
+                <hr/>
+                <Row>
+                    <Container className="overview_container">
+                        <Row>
+                            {stakeholders.map((stakeholder, index) => {
 
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Key Stakeholder?</th>
-                    </tr>
-                    </thead>
-                    {this.state.Stakeholders.map(line =>{
-                        return (
-                            <tr>
-                                <td>{line.name} </td>
-                                <td>{line.mail}</td>
-                                <td>{line.keyStakeHolder.toString()}</td>
-                            </tr>
-                        )
-                    })}
-                </Table>
-            </div>
+                                return (
+                                    <Stakeholder
+                                        key={index}
+                                        stakeholder={stakeholder}
+                                        save={this.handleSave}
+                                        delete={() => this.handleDelete(stakeholder.stakeholder_id)}
+                                    />
+                                );
+                            })}
+                        </Row>
+                    </Container>
+                </Row>
+                <Row>
+                    <Col>
+                        <h4>Stakeholders:</h4>
+                    </Col>
+                </Row>
+                <hr/>
+                <Row>
+                    <Container className="overview_container">
+                        <Row>
+
+                        </Row>
+                    </Container>
+                </Row>
+            </Container>
+
         )
     }
 }

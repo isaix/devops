@@ -72,6 +72,153 @@ export function deleteProject(id, callback) {
         })
 }
 
+/**
+ *
+ * Issues
+ *
+ */
+
+export function createIssue(project, issue, callback){
+    Axios.post(path.api + '/projects/' + project.title + '/' + project._id, issue)
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getIssues(project, callback){
+    Axios.get(path.api + '/projects/' + project.title + '/' + project._id)
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function closeIssue(project, issue, callback){
+    Axios.patch(path.api + '/projects/' + project.title + '/' + project._id, issue)
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/**
+ *
+ *
+ * Tasks
+ *
+ */
+export function createTask(id, task, callback){
+    Axios.put(path.api + '/projects/' + id + '/tasks/all', {project: {task: task}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getTasks(id, callback){
+    Axios.get(path.api + '/projects/' + id + '/tasks/all')
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function updateTask(id, task, callback){
+    Axios.patch(path.api + '/projects/' + id + '/tasks/' + task.task_id, {project: {task: task}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function deleteTask(p_id, t_id, callback) {
+    Axios.delete(path.api + '/projects/' + p_id + '/tasks/' + t_id)
+        .then(resp => {
+            {
+                callback && callback(resp.status)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+/**
+ * Stakeholders
+ */
+export function createStakeholder(id, stakeholder, callback){
+    Axios.put(path.api + '/projects/' + id + '/stakeholders/all', {project: {stakeholder: stakeholder}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getStakeholders(id, callback){
+    Axios.get(path.api + '/projects/' + id + '/stakeholders/all')
+        .then(resp => {
+            {
+                callback && callback(resp.data, null)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function updateStakeholder(id, stakeholder, callback){
+    Axios.patch(path.api + '/projects/' + id + '/stakeholders/' + stakeholder.stakeholder_id, {project: {stakeholder: stakeholder}})
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function deleteStakeholder(p_id, s_id, callback) {
+    Axios.delete(path.api + '/projects/' + p_id + '/stakeholders/' + s_id)
+        .then(resp => {
+            {
+                callback && callback(resp.status)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 export function login(username, password, callback) {
     Axios.post(path.api + '/login/', {
         headers:{

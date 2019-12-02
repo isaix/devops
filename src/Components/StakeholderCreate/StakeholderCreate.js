@@ -1,34 +1,26 @@
 import React, {Component} from 'react';
-import {createProject} from "../../../Axios";
-import {Card, Button, Modal, Form} from "react-bootstrap";
+import {createStakeholder} from "../../Axios";
+import {OverlayTrigger, Tooltip, Form, Modal, Button} from "react-bootstrap";
 
 const initialState = {
-    title: '',
-    description: '',
-    start_date: '',
-    completed_by: '',
-    project_purpose: '',
-    project_description: '',
-    desired_results: '',
-    exclusions: '',
-    communication_needs: '',
-    acceptance_criteria: '',
-    constraints: '',
-    approvals: ''
-}
+    stakeholder_id: '',
+    stakeholder_name: '',
+    stakeholder_type: '',
+    stakeholder_interest: ''
+};
 
-class Create extends Component {
+class StakeholderCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            project: initialState,
+            stakeholder: initialState,
             show: false
         }
     }
 
     handleChange = (e) => {
         console.log(e.target)
-        this.setState({project: {...this.state.project, [e.target.name]: e.target.value}})
+        this.setState({stakeholder: {...this.state.stakeholder, [e.target.name]: e.target.value}})
     }
 
 
@@ -40,12 +32,12 @@ class Create extends Component {
         this.setState({show: false})
     };
 
-    handleCreate = (project) => {
-        createProject(project, (err, project) => {
+    handleCreate = (stakeholder) => {
+        createStakeholder(this.props.id, stakeholder, (err, stakeholder) => {
             if (err) {}
             this.setState({
                 show: false,
-                project: initialState
+                stakeholder: initialState
             })
             this.props.update && this.props.update()
         })
@@ -54,37 +46,46 @@ class Create extends Component {
 
 
     render() {
-        const {project, show} = this.state;
-        const {updateProjects} = this.props
+        const {stakeholder, show} = this.state;
+
         return (
             <>
+                <OverlayTrigger
+                    placement="right"
+                    overlay={
+                        <Tooltip>
+                            Create new stakeholder
+                        </Tooltip>
+                    }
+                >
+                    <Button onClick={this.handleOpen} variant="outline-primary">New +</Button>
+                </OverlayTrigger>
 
-                <Button className="overview_create" variant="outline-primary" onClick={this.handleOpen}><h1 >+</h1></Button>
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Project</Modal.Title>
+                        <Modal.Title>Create stakeholder</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            {Object.keys(project).map((key) => {
+                        {Object.keys(stakeholder).map((key) => {
+                            if (!key.includes('id')){
                                 return (
                                     <Form.Group key={key}>
                                         <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
                                         <Form.Control
                                             name={key}
-                                            value={project[key]}
+                                            value={stakeholder[key]}
                                             onChange={this.handleChange}
                                         />
                                     </Form.Group>
                                 )
-                            })}
-                        </Form>
+                            }
+                        })}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={() => this.handleCreate(project)}>
+                        <Button variant="primary" onClick={() => this.handleCreate(stakeholder)}>
                             Save
                         </Button>
                     </Modal.Footer>
@@ -95,4 +96,4 @@ class Create extends Component {
 
 }
 
-export default Create
+export default StakeholderCreate
