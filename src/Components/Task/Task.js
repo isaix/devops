@@ -28,7 +28,7 @@ class Task extends Component{
     };
 
     handleClose = () => {
-        this.setState({show: false})
+        this.setState({show: false, edit: false})
     };
 
     handleEdit = () => {
@@ -53,12 +53,12 @@ class Task extends Component{
             <>
                 <ListGroup.Item onClick={this.handleOpen} className="task_item">
                     <h5>{task.task_name}</h5>
-                    <p>{task.task_id}</p>
+                    <p>{task.task_description}</p>
                 </ListGroup.Item>
 
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Task #{task.task_id}</Modal.Title>
+                        <Modal.Title>{task.task_name}</Modal.Title>
                         <ButtonGroup style={{marginLeft: "20px", marginBottom: "5px"}}>
                             <Button variant="outline-secondary" onClick={this.handleEdit}>Edit</Button>
                             <Button variant="outline-danger" onClick={this.handleDelete}>Delete</Button>
@@ -86,24 +86,35 @@ class Task extends Component{
 function View ({edit, task, onChange}){
     if (edit){
         return (
-            <Form>
-                <Form.Group>
-                    <Form.Label>Task Name</Form.Label>
-                    <Form.Control
-                        name="task_name"
-                        value={task.task_name}
-                        onChange={onChange}
-                    />
-                </Form.Group>
-            </Form>
+            Object.keys(task).map((key) => {
+                    if (!key.includes('id')){
+                        return (
+                            <Form.Group key={key}>
+                                <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
+                                <Form.Control
+                                    name={key}
+                                    value={task[key]}
+                                    onChange={onChange}
+                                />
+                            </Form.Group>
+                        )
+                    }
+                })
         );
     }
     else {
         return (
-            <div>
-                <h5>Task Name</h5>
-                <p>{task.task_name}</p>
-            </div>
+            Object.keys(task).map((key) => {
+                    if (!key.includes('name')){
+                        return (
+                            <div key={key}>
+                                <h5>{key.replace("_", " ").capitalize()}</h5>
+                                <p>{task[key]}</p>
+                            </div>
+                        )
+                    }
+                })
+
         );
     }
 }

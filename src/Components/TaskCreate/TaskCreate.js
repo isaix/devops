@@ -4,7 +4,8 @@ import {OverlayTrigger, Tooltip, Form, Modal, Button} from "react-bootstrap";
 
 const initialState = {
     task_id: '',
-    task_name: ''
+    task_name: '',
+    task_description: ''
 }
 
 class TaskCreate extends Component {
@@ -64,16 +65,20 @@ class TaskCreate extends Component {
                         <Modal.Title>Create Task</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            <Form.Group>
-                                <Form.Label>Task Name</Form.Label>
-                                <Form.Control
-                                    name="task_name"
-                                    value={task.task_name}
-                                    onChange={this.handleChange}
-                                />
-                            </Form.Group>
-                        </Form>
+                        {Object.keys(task).map((key) => {
+                            if (!key.includes('id')){
+                                return (
+                                    <Form.Group key={key}>
+                                        <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
+                                        <Form.Control
+                                            name={key}
+                                            value={task[key]}
+                                            onChange={this.handleChange}
+                                        />
+                                    </Form.Group>
+                                )
+                            }
+                        })}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
