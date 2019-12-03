@@ -37,7 +37,7 @@ class Overview extends Component{
                         <Card key={project._id} className="overview_card" onClick={() => this.handleOpen(project._id)}>
                             <Card.Header as="h6">{project.title}</Card.Header>
                             <Card.Body>
-                                <Card.Text>{project.description}</Card.Text>
+                                <Card.Text>{project.project_description}</Card.Text>
                             </Card.Body>
                         </Card>
                     ))}
