@@ -48,8 +48,8 @@ export function getProject(id, callback) {
         })
 }
 
-export function updateProject(opportunity, callback) {
-    Axios.patch(path.api + '/projects/' + opportunity._id, {opportunity})
+export function updateProject(project, callback) {
+    Axios.put(path.api + '/projects/' + project._id, {project})
         .then(resp => {
             {
                 callback && callback(resp.data)

@@ -18,7 +18,7 @@ import Signup from "./Components/Signup/Signup";
 class App extends Component {
     render() {
 
-        if(localStorage.getItem("token") == null){
+        if(sessionStorage.getItem("token") == null){
             return(
             <Router>
                 <Switch>
