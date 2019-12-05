@@ -11,7 +11,7 @@ import Login from "./Components/Login/Login";
 import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
 import Overview from "./Containers/Projects/Overview/Overview";
 import Project from "./Containers/Projects/Project/Project";
-import ProjectScope_Component from "./Components/ProjectScope/ProjectScope_Component";
+import ProjectScope from "./Components/ProjectScope/ProjectScope";
 import Signup from "./Components/Signup/Signup";
 
 
@@ -42,11 +42,9 @@ class App extends Component {
                     <Route exact path="/stakeholders/interview" component={KeyStakeholderInterview}/>
                     <Route exact path="/projects" component={Overview}/>
                     <Route path="/:id/:view" component={Project}/>
-                    <Route exact path="/projects/scope" component={ProjectScope_Component}/>
+                    <Route exact path="/projects/scope" component={ProjectScope}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
-
-
             </Router>
         )
     }
