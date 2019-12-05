@@ -1,6 +1,7 @@
 import {ListGroup, Button, ButtonGroup, ButtonToolbar, Form} from "react-bootstrap";
 import React, {Component} from "react";
 import {deleteProject} from "../../Axios";
+import ProjectScope from "../ProjectScope/ProjectScope";
 
 const initialState = {
     title: '',
@@ -68,34 +69,21 @@ class ProjectOverview extends Component{
                     </ButtonGroup>
                 </ButtonToolbar>
                 {edit ? (
-                    <Form>
-                        <Form.Group>
-                            {Object.keys(project).map((key) => {
-                                if (!key.includes('id') && key !== "__v" && !Array.isArray(project[key])){
-                                    return (
-                                        <Form.Group key={key}>
-                                            <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
-                                            <Form.Control
-                                                name={key}
-                                                value={project[key]}
-                                                onChange={this.handleChange}
-                                            />
-                                        </Form.Group>
-                                    )
-                                }
-                            })}
-                        </Form.Group>
+                    <div>
+                        <ProjectScope project={project} onChange={this.handleChange}/>
+                        <hr/>
                         <Button variant="secondary" onClick={this.handleEdit}>
                             Cancel
                         </Button>
                         <Button variant="primary" onClick={this.handleSave}>
                             Save
                         </Button>
-                    </Form>
+                    </div>
+
                 ) : (
                     <ListGroup variant="flush">
                         {Object.keys(project).map((key) => {
-                            if (!Array.isArray(project[key]) && key !== "title" && key !== "__v"){
+                            if (!Array.isArray(project[key]) && key !== "title" && key !== "__v" && key !== "description"){
                                 return (
                                     <ListGroup.Item key={key}>
                                         <h6>{key.replace("_", " ").capitalize()}</h6>
