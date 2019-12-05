@@ -28,7 +28,7 @@ class Overview extends Component{
         const {projects} = this.state;
 
         return (
-            <Container className="overview_container">
+            <Container>
                 <Row>
                     <h1>Projects</h1>
                 </Row>
