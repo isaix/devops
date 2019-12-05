@@ -1,11 +1,12 @@
 import {Button, Card, ListGroup, Nav, Navbar, Row} from "react-bootstrap";
 import React, {Component} from "react";
-import {deleteProject, getProject, updateProject} from "../../../Axios";
+import {deleteProject, getProject, updateProject, addProjectCollab} from "../../../Axios";
 import StakeholderOverview from "../../../Components/StakeholderOverview/StakeholderOverview";
 import IssuesOverview from "../../../Components/IssuesOverview/IssuesOverview";
 import TasksOverview from "../../../Components/TasksOverview/TasksOverview";
 import ProjectOverview from "../../../Components/ProjectOverview/ProjectOverview";
 import {Redirect} from "react-router-dom";
+import AddCollaborator from "../../../Components/AddCollaborator/AddCollaborator";
 //import "./ProjectStyle.css"
 
 const initialState = {
@@ -55,6 +56,8 @@ class Project extends Component{
         })
     };
 
+
+
     render (){
         const {project, view} = this.state;
         const root = '/' + project._id;
@@ -62,7 +65,7 @@ class Project extends Component{
         return (
             <Card>
                 <Card.Header>
-                    <h1>{project.title}</h1>
+                    <h1>{project.title}</h1> <AddCollaborator update={() => this.updateProject(project._id)} id={project._id}/>
                     <Navbar className={"project-navbar"} bg="light" variant="light">
                         <Navbar.Brand href={root + '/overview'}>Overview</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

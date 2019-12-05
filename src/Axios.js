@@ -74,6 +74,18 @@ export function deleteProject(id, callback) {
         })
 }
 
+export function addProjectCollab(id, collaborator, callback) {
+    Axios.post(path.api + '/projects/' + id, collaborator)
+        .then(resp => {
+            {
+                callback && callback(resp.data)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
 /**
  *
  * Issues
@@ -123,7 +135,7 @@ export function closeIssue(project, issue, callback){
  *
  */
 export function createTask(id, task, callback){
-    Axios.put(path.api + '/projects/' + id + '/tasks/all', {project: {task: task}})
+    Axios.post(path.api + '/projects/' + id + '/tasks/', {project: {task: task}})
         .then(resp => {
             {
                 callback && callback(resp.data)
