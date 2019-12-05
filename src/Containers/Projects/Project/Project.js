@@ -45,7 +45,6 @@ class Project extends Component{
 
     handleDelete = () => {
         deleteProject(this.state.project._id, call => {
-            //Todo: return to projects tab
             this.props.history.goBack();
         });
     };
