@@ -18,15 +18,8 @@ import Signup from "./Components/Signup/Signup";
 class App extends Component {
     render() {
 
-        if(sessionStorage.getItem("token") == null){
-            return(
-            <Router>
-                <Switch>
-                    <Route exact path="/signup" component={Signup}/>
-                    <Route component={Login}/>
-                </Switch>
-            </Router>
-            )
+        if(sessionStorage.getItem("token") == null && window.location.pathname !== ('/login' || '/signup')){
+           window.location.replace('/login')
         }
 
         const loggedIn = true;
@@ -43,6 +36,8 @@ class App extends Component {
                     <Route exact path="/projects" component={Overview}/>
                     <Route path="/:id/:view" component={Project}/>
                     <Route exact path="/projects/scope" component={ProjectScope}/>
+                    <Route path='/login' component={Login}/>
+                    <Route exact path="/signup" component={Signup}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
             </Router>
