@@ -5,7 +5,7 @@ import {OverlayTrigger, Tooltip, Form, Modal, Button} from "react-bootstrap";
 const initialState = {
     stakeholder_id: '',
     stakeholder_name: '',
-    stakeholder_type: '',
+    stakeholder_type: 'primary',
     stakeholder_interest: ''
 };
 

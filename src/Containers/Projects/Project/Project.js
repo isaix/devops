@@ -53,8 +53,6 @@ class Project extends Component{
     handleSave = (project) => {
         updateProject(project, call => {
             this.updateProject(project._id)
-            console.log(project)
-            //TOdo: somehow this doesn't get updated on the backend..
         })
     };
 
