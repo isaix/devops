@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {createProject} from "../../../Axios";
-import {Card, Button, Modal, Form} from "react-bootstrap";
+import {Card, Button, Modal, Form, Tooltip, OverlayTrigger} from "react-bootstrap";
 import ProjectScope from "../../../Components/ProjectScope/ProjectScope";
 
 const initialState = {
@@ -61,8 +61,17 @@ class Create extends Component {
         const {updateProjects} = this.props
         return (
             <>
+                <OverlayTrigger
+                    placement="bottom"
+                    overlay={
+                        <Tooltip>
+                            Create new project
+                        </Tooltip>
+                    }
+                >
+                    <Button className="overview_create" variant="outline-primary" onClick={this.handleOpen}><h1 >+</h1></Button>
+                </OverlayTrigger>
 
-                <Button className="overview_create" variant="outline-primary" onClick={this.handleOpen}><h1 >+</h1></Button>
                 <Modal show={show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create Project</Modal.Title>
