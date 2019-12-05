@@ -11,7 +11,7 @@ const path = {
  */
 
 export function createProject(project, callback) {
-    Axios.post(path.api + '/projects', {project: project})
+    Axios.post(path.api + '/projects/user/projects/' + sessionStorage.getItem('user_id'), {project: project})
         .then(resp => {
             {
                 callback && callback(resp.data)
@@ -23,7 +23,9 @@ export function createProject(project, callback) {
 }
 
 export function getProjects(callback) {
-    Axios.get(path.api + '/projects')
+    Axios.get(path.api + '/projects/user/projects/' + sessionStorage.getItem('user_id'), {
+        headers: {'Authorization':sessionStorage.getItem('token')}
+    })
         .then(resp => {
             {
                 callback && callback(resp.data, null)
@@ -46,8 +48,8 @@ export function getProject(id, callback) {
         })
 }
 
-export function updateProject(project, callback) {
-    Axios.put(path.api + '/projects/' + project._id, {project})
+export function updateProject(opportunity, callback) {
+    Axios.patch(path.api + '/projects/' + opportunity._id, {opportunity})
         .then(resp => {
             {
                 callback && callback(resp.data)
@@ -221,16 +223,36 @@ export function deleteStakeholder(p_id, s_id, callback) {
 
 export function login(username, password, callback) {
     Axios.post(path.api + '/login/', {
-        headers:{
+        user:{
             username: username,
             password: password,
         }
     }).then(resp =>{
         {
-            callback && callback(resp.status)
+
+            callback && callback(resp)
         }
     })
         .catch(error => {
+            callback(error)
+            console.log(error)
+        })
+}
+
+export function createUser(email, password, repeatpassword, callback) {
+    Axios.post(path.api + '/signup/', {
+        user:{
+            username: email,
+            password: password,
+            repeatpassword: repeatpassword
+        }
+    }).then(resp =>{
+        {
+            callback && callback(resp)
+        }
+    })
+        .catch(error => {
+            callback(error)
             console.log(error)
         })
 }

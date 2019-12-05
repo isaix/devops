@@ -7,15 +7,27 @@ import Header from "./Components/Header/Header";
 import StakeholderIdentification from "./Components/StakeholderIdentification/StakeholderIdentification";
 import KeyStakeholderInterview from "./Components/KeyStakeholderInterview/KeyStakeholderInterview"
 import Main from "./Containers/Main/Main";
-import Login from "./Containers/Login/Login";
+import Login from "./Components/Login/Login";
 import StakeholderOverview from "./Components/StakeholderOverview/StakeholderOverview";
 import Overview from "./Containers/Projects/Overview/Overview";
 import Project from "./Containers/Projects/Project/Project";
 import ProjectScope_Component from "./Components/ProjectScope/ProjectScope";
+import Signup from "./Components/Signup/Signup";
 
 
 class App extends Component {
     render() {
+
+        if(localStorage.getItem("token") == null){
+            return(
+            <Router>
+                <Switch>
+                    <Route exact path="/signup" component={Signup}/>
+                    <Route component={Login}/>
+                </Switch>
+            </Router>
+            )
+        }
 
         const loggedIn = true;
         return (
@@ -26,6 +38,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={Main}/>
                     <Route exact path="/login" component={Login}/>
+                    <Route exact path="/signup" component={Signup}/>
                     <Route exact path="/stakeholders/identification" component={StakeholderIdentification}/>
                     <Route exact path="/stakeholders/interview" component={KeyStakeholderInterview}/>
                     <Route exact path="/projects" component={Overview}/>
