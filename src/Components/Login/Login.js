@@ -29,7 +29,8 @@ class Login extends Component {
         login(this.state.email, this.state.password, (res) => {
             //console.log(res);
             if(res.status !== null && res.status === 200){
-                localStorage.setItem('token', 'bearer ' + res.data.token);
+                sessionStorage.setItem('token', 'Bearer ' + res.data.token);
+                sessionStorage.setItem('user_id', res.data.user_id);
                 console.log("login")
                 this.props.history.push('/projects');
                 window.location.reload();

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {createProject} from "../../../Axios";
 import {Card, Button, Modal, Form} from "react-bootstrap";
+import ProjectScope from "../../../Components/ProjectScope/ProjectScope";
 
 const initialState = {
     title: '',
@@ -67,20 +68,7 @@ class Create extends Component {
                         <Modal.Title>Create Project</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            {Object.keys(project).map((key) => {
-                                return (
-                                    <Form.Group key={key}>
-                                        <Form.Label>{key.replace("_", " ").capitalize()}</Form.Label>
-                                        <Form.Control
-                                            name={key}
-                                            value={project[key]}
-                                            onChange={this.handleChange}
-                                        />
-                                    </Form.Group>
-                                )
-                            })}
-                        </Form>
+                        <ProjectScope project={project} onChange={this.handleChange}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
