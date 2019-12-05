@@ -32,6 +32,7 @@ class Login extends Component {
                 localStorage.setItem('token', 'bearer ' + res.data.token);
                 console.log("login")
                 this.props.history.push('/projects');
+                window.location.reload();
             }else if(res.message.includes("401")){
                 this.setState({showError: true});
                 this.setState({errorMessage: "Wrong password"});
@@ -90,6 +91,7 @@ class Login extends Component {
                                 {
                                     this.showError()
                                 }
+                                <a href="#" className="" onClick={ () => {this.props.history.push('signup')}}>Dont have an account yet? Sign up here</a>
                             </div>
                             </Card>
                         </div>

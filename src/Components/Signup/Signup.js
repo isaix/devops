@@ -100,6 +100,7 @@ class Signup extends Component {
                                 {
                                     this.showError()
                                 }
+                                <a href="#" className="" onClick={ () => {this.props.history.push('login')}}>Already have an account? Log in here</a>
                             </div>
                             </Card>
                         </div>

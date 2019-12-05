@@ -36,17 +36,13 @@ class App extends Component {
                     loggedIn && <Header/>
                 }
                 <Switch>
-                    <Route exact path="/" component={Main}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route exact path="/signup" component={Signup}/>
+                    <Route exact path="/" component={Overview}/>
                     <Route exact path="/stakeholders" component={StakeholderOverview}/>
                     <Route exact path="/stakeholders/identification" component={StakeholderIdentification}/>
                     <Route exact path="/stakeholders/interview" component={KeyStakeholderInterview}/>
                     <Route exact path="/projects" component={Overview}/>
                     <Route path="/:id/:view" component={Project}/>
                     <Route exact path="/projects/scope" component={ProjectScope_Component}/>
-
-
                     <Route component={NotFoundPage}/>
                 </Switch>
 
