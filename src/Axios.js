@@ -11,7 +11,7 @@ const path = {
  */
 
 export function createProject(project, callback) {
-    Axios.post(path.api + '/projects', {project: project})
+    Axios.post(path.api + '/projects/user/projects/' + sessionStorage.getItem('user_id'), {project: project})
         .then(resp => {
             {
                 callback && callback(resp.data)
@@ -23,7 +23,9 @@ export function createProject(project, callback) {
 }
 
 export function getProjects(callback) {
-    Axios.get(path.api + '/projects')
+    Axios.get(path.api + '/projects/user/projects/' + sessionStorage.getItem('user_id'), {
+        headers: {'Authorization':sessionStorage.getItem('token')}
+    })
         .then(resp => {
             {
                 callback && callback(resp.data, null)
