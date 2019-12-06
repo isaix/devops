@@ -65,7 +65,6 @@ class Login extends Component {
                     <Col>
                         <div>
                             <Card>
-                            {/*Tyvstjålet kode*/}
                             <div className="Login">
                                 <Form style={{marginRight: 2 + 'em'}}>
                                     <FormGroup controlId="email" size="large">
