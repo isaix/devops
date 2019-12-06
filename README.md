@@ -1,3 +1,6 @@
+Live version running on 
+[https://dtu-devops-app.herokuapp.com/](https://dtu-devops-app.herokuapp.com/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
