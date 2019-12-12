@@ -11,7 +11,7 @@ class Header extends Component {
 
     logout(){
         sessionStorage.removeItem("token")
-        this.props.history.push('/login');
+        window.location.href = "https://dtu-devops-app.herokuapp.com/login";
     }
 
     render() {
