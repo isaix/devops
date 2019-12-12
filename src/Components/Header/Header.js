@@ -9,6 +9,11 @@ class Header extends Component {
         this.state = {}
     }
 
+    logout(){
+        sessionStorage.removeItem("token")
+        this.props.history.push('/login');
+    }
+
     render() {
         return (
             <Container className={"header-container"} fluid={true}>
@@ -22,13 +27,15 @@ class Header extends Component {
                         </Nav>
 
                         <Form inline>
-                            <Button variant="outline-light" onClick={() => sessionStorage.removeItem("token")}>Log out</Button>
+                            <Button variant="outline-light" onClick={this.logout()}>Log out</Button>
                         </Form>
                     </Navbar>
                 </Row>
             </Container>
         )
     }
+
+
 
 }
 
