@@ -27,7 +27,7 @@ class Header extends Component {
                         </Nav>
 
                         <Form inline>
-                            <Button variant="outline-light" onClick={this.logout()}>Log out</Button>
+                            <Button variant="outline-light" onClick={() => this.logout()}>Log out</Button>
                         </Form>
                     </Navbar>
                 </Row>
